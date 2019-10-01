@@ -3,6 +3,9 @@ package org.softwire.training.bookish;
 import org.jdbi.v3.core.Jdbi;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class Main {
@@ -38,7 +41,6 @@ public class Main {
     }
 
     private static void jdbiMethod(String connectionString) {
-        System.out.println("\nJDBI method...");
 
         // TODO: print out the details of all the books (using JDBI)
         // See this page for details: http://jdbi.org
@@ -46,7 +48,18 @@ public class Main {
 
         Jdbi jdbi = Jdbi.create(connectionString);
 
+        List<Library> libraryList = jdbi.withHandle(handle -> {
+            List<Library> library =
+                    handle.createQuery("SELECT * FROM library ORDER BY bookTitle")
+                            .mapToBean(Library.class)
+                            .list();
 
+            return library;
+        });
+
+        for(Library library : libraryList) {
+            System.out.println(library.getBookTitle() + " from " + library.getBookAuthor());
+        }
 
     }
 }
