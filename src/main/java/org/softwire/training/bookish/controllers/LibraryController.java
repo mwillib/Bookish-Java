@@ -1,8 +1,10 @@
 package org.softwire.training.bookish.controllers;
 
+import org.softwire.training.bookish.models.database.Book;
 import org.softwire.training.bookish.models.database.Library;
 import org.softwire.training.bookish.models.database.Technology;
 import org.softwire.training.bookish.models.page.AboutPageModel;
+import org.softwire.training.bookish.models.page.BookPageModel;
 import org.softwire.training.bookish.models.page.LibraryPageModel;
 import org.softwire.training.bookish.services.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,11 +82,11 @@ public class LibraryController {
     @RequestMapping("/book")
     ModelAndView selectBook(@RequestParam int idLibrary) {
 
-        List<Library> books = libraryService.selectBook(idLibrary);
+        List<Book> books = libraryService.selectBook(idLibrary);
 
-        LibraryPageModel libraryPageModel = new LibraryPageModel();
-        libraryPageModel.setBooks(books);
+        BookPageModel bookPageModel = new BookPageModel();
+        bookPageModel.setSpecificBooks(books);
 
-        return new ModelAndView("book", "model", libraryPageModel);
+        return new ModelAndView("book", "model", bookPageModel);
     }
 }

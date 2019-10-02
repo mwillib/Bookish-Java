@@ -1,5 +1,6 @@
 package org.softwire.training.bookish.services;
 
+import org.softwire.training.bookish.models.database.Book;
 import org.softwire.training.bookish.models.database.Library;
 import org.springframework.stereotype.Service;
 
@@ -50,10 +51,12 @@ public class LibraryService extends DatabaseService {
         );
     }
 
-    public List<Library> selectBook (int idLibrary) {
+    public List<Book> selectBook (int idLibrary) {
         return jdbi.withHandle(handle ->
+
                 handle.createQuery("SELECT * FROM books WHERE idLibrary = :idLibrary")
-                        .mapToBean(Library.class)
+                        .bind("idLibrary", idLibrary)
+                        .mapToBean(Book.class)
                         .list()
         );
     }
