@@ -49,4 +49,12 @@ public class LibraryService extends DatabaseService {
                         .list()
         );
     }
+
+    public List<Library> selectBook (int idLibrary) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM books WHERE idLibrary = :idLibrary")
+                        .mapToBean(Library.class)
+                        .list()
+        );
+    }
 }

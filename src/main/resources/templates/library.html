@@ -17,7 +17,7 @@
         </div>
 
         <div class="container">
-            <h4>Books</h4>
+            <h2>Books</h2>
             <div>
                 <table>
                     <thead>
@@ -31,7 +31,7 @@
                     <tbody>
                         <tr th:each="book : ${model.getBooks()}">
                             <td th:text="${book.getIdLibrary()}"></td>
-                            <td th:text="${book.getBookTitle()}"></td>
+                            <td><a  th:href="${'/library/book?idLibrary=' + book.getIdLibrary()}" th:text="${book.getBookTitle()}"></a></td>
                             <td th:text="${book.getBookAuthor()}"></td>
                             <td th:text="${book.getISBN()}"></td>
                             <td><a th:href="${'/library/delete-book?idLibrary=' + book.getIdLibrary()}" class="delete-button">delete</a></td>
