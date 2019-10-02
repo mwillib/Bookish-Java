@@ -1,11 +1,10 @@
 package org.softwire.training.bookish;
 
 import org.jdbi.v3.core.Jdbi;
+import org.softwire.training.bookish.models.database.Library;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 public class Main {
@@ -17,8 +16,8 @@ public class Main {
         String password = "Csakteszt11!";
         String connectionString = "jdbc:mysql://" + hostname + "/" + database + "?user=" + user + "&password=" + password + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT&useSSL=false";
 
-        jdbcMethod(connectionString);
-        jdbiMethod(connectionString);
+//        jdbcMethod(connectionString);
+//        jdbiMethod(connectionString);
     }
 
     private static void jdbcMethod(String connectionString) throws SQLException {

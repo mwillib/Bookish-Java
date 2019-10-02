@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <!--@thymesVar id="model" type="org.softwire.training.bookish.models.page.LibraryPageModel"-->
+
+    <head>
+        <title>Bookish - Library</title>
+
+        <link rel="stylesheet" href="/styles/general.css"/>
+        <link rel="stylesheet" href="/styles/navbar.css"/>
+        <link rel="stylesheet" href="/styles/library.css"/>
+    </head>
+
+    <body>
+        <div th:replace="fragments/navbar :: navbar">
+            <!-- This element is replaced by the HTML in fragments/navbar.html -->
+        </div>
+
+        <div class="container">
+            <h3>Books</h3>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>ISBN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="book : ${model.getBooks()}">
+                            <td th:text="${book.getIdLibrary()}"></td>
+                            <td th:text="${book.getBookTitle()}"></td>
+                            <td th:text="${book.getBookAuthor()}"></td>
+                            <td th:text="${book.getISBN()}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Add a book:</h2>
+            <form th:action="@{/library/add-book}" method="post">
+                <div class="add-tech-row">
+                    <label>
+                        <span>Title: </span>
+                        <input type="text" name="bookTitle">
+                    </label>
+                </div>
+                <div class="add-tech-row">
+                    <label>
+                        <span>Author: </span>
+                        <input type="text" name="bookAuthor">
+                    </label>
+                </div>
+                <div class="add-tech-row">
+                    <label>
+                        <span>ISBN: </span>
+                        <input type="text" name="ISBN">
+                    </label>
+                </div>
+                <div class="add-tech-row">
+                    <span><!-- spacer --></span>
+                    <input type="submit" value="Add Book" />
+                </div>
+            </form>
+        </div>
+
+    </body>
+</html>
+
+
