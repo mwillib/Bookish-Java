@@ -54,4 +54,15 @@ public class LibraryController {
 
         return new RedirectView("/library");
     }
+
+    @RequestMapping("/sorted-by-title")
+    ModelAndView sortTitle() {
+
+        List<Library> allBooks = libraryService.sortByTitle();
+
+        LibraryPageModel libraryPageModel = new LibraryPageModel();
+        libraryPageModel.setBooks(allBooks);
+
+        return new ModelAndView("library", "model", libraryPageModel);
+    }
 }

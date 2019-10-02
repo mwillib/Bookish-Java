@@ -10,7 +10,7 @@ public class LibraryService extends DatabaseService {
 
     public List<Library> getAllBooks() {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM library")
+                handle.createQuery("SELECT * FROM library ")
                         .mapToBean(Library.class)
                         .list()
         );
@@ -31,6 +31,14 @@ public class LibraryService extends DatabaseService {
                 handle.createUpdate("DELETE FROM library WHERE idLibrary = :idLibrary")
                         .bind("idLibrary", idLibrary)
                         .execute()
+        );
+    }
+
+    public List<Library> sortByTitle() {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM library ORDER BY bookTitle ASC")
+                        .mapToBean(Library.class)
+                        .list()
         );
     }
 }

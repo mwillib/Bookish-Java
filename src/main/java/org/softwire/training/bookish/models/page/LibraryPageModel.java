@@ -14,4 +14,5 @@ public class LibraryPageModel {
     public void setBooks(List<Library> books) {
         this.books = books;
     }
+
 }
