@@ -9,6 +9,7 @@ import org.softwire.training.bookish.models.page.LibraryPageModel;
 import org.softwire.training.bookish.services.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -83,9 +84,12 @@ public class LibraryController {
     ModelAndView selectBook(@RequestParam int idLibrary) {
 
         List<Book> books = libraryService.selectBook(idLibrary);
+        String title = libraryService.specificTitle(idLibrary);
 
         BookPageModel bookPageModel = new BookPageModel();
         bookPageModel.setSpecificBooks(books);
+
+        bookPageModel.setTitle(title);
 
         return new ModelAndView("book", "model", bookPageModel);
     }

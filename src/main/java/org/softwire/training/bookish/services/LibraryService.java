@@ -60,4 +60,16 @@ public class LibraryService extends DatabaseService {
                         .list()
         );
     }
+
+    public String specificTitle (int idLibrary) {
+        return jdbi.withHandle(handle ->
+
+                handle.createQuery("SELECT bookTitle FROM library WHERE idLibrary = :idLibrary")
+                        .bind("idLibrary", idLibrary)
+                        .mapTo(String.class)
+                        .findFirst()
+                .get()
+        );
+    }
+
 }
