@@ -41,4 +41,12 @@ public class LibraryService extends DatabaseService {
                         .list()
         );
     }
+
+    public List<Library> sortByAuthor() {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM library ORDER BY bookAuthor ASC")
+                        .mapToBean(Library.class)
+                        .list()
+        );
+    }
 }

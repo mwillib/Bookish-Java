@@ -65,4 +65,15 @@ public class LibraryController {
 
         return new ModelAndView("library", "model", libraryPageModel);
     }
+
+    @RequestMapping("/sorted-by-author")
+    ModelAndView sortAuthor() {
+
+        List<Library> allBooks = libraryService.sortByAuthor();
+
+        LibraryPageModel libraryPageModel = new LibraryPageModel();
+        libraryPageModel.setBooks(allBooks);
+
+        return new ModelAndView("library", "model", libraryPageModel);
+    }
 }
