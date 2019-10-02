@@ -17,7 +17,7 @@
         </div>
 
         <div class="container">
-            <h3>Books</h3>
+            <h4>Books</h4>
             <div>
                 <table>
                     <thead>
@@ -34,6 +34,7 @@
                             <td th:text="${book.getBookTitle()}"></td>
                             <td th:text="${book.getBookAuthor()}"></td>
                             <td th:text="${book.getISBN()}"></td>
+                            <td><a th:href="${'/library/delete-book?idLibrary=' + book.getIdLibrary()}" class="delete-button">delete</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -41,25 +42,25 @@
 
             <h2>Add a book:</h2>
             <form th:action="@{/library/add-book}" method="post">
-                <div class="add-tech-row">
+                <div class="add-book-row">
                     <label>
                         <span>Title: </span>
                         <input type="text" name="bookTitle">
                     </label>
                 </div>
-                <div class="add-tech-row">
+                <div class="add-book-row">
                     <label>
                         <span>Author: </span>
                         <input type="text" name="bookAuthor">
                     </label>
                 </div>
-                <div class="add-tech-row">
+                <div class="add-book-row">
                     <label>
                         <span>ISBN: </span>
                         <input type="text" name="ISBN">
                     </label>
                 </div>
-                <div class="add-tech-row">
+                <div class="add-book-row">
                     <span><!-- spacer --></span>
                     <input type="submit" value="Add Book" />
                 </div>
