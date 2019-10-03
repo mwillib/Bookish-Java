@@ -18,7 +18,15 @@
     </div>
 
     <div class="container">
-            <h2 th:text="${model.getTitle()}"></h2>
+        <h2 th:text="${model.getTitle()}"></h2>
+
+            <form th:action="${'/library/book/add-copy?idLibrary=' + model.getSpecificBooks().get(0).getIdLibrary()}" method="post">
+                <div class="add-book-row">
+                    <span><!-- spacer --></span>
+                    <input type="submit" value="Add Copy" />
+                </div>
+            </form>
+
         <div>
             <table>
                 <thead>

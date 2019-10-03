@@ -51,7 +51,7 @@ public class LibraryService extends DatabaseService {
         );
     }
 
-    public List<Book> selectBook (int idLibrary) {
+    public List<Book> selectBook(int idLibrary) {
         return jdbi.withHandle(handle ->
 
                 handle.createQuery("SELECT * FROM books WHERE idLibrary = :idLibrary")
@@ -61,15 +61,33 @@ public class LibraryService extends DatabaseService {
         );
     }
 
-    public String specificTitle (int idLibrary) {
+    public String specificTitle(int idLibrary) {
         return jdbi.withHandle(handle ->
 
                 handle.createQuery("SELECT bookTitle FROM library WHERE idLibrary = :idLibrary")
                         .bind("idLibrary", idLibrary)
                         .mapTo(String.class)
                         .findFirst()
-                .get()
+                        .get()
         );
     }
 
+    public void addCopy(int idLibrary) {
+        jdbi.withHandle(handle ->
+                handle.createUpdate("INSERT INTO books (idLibrary) VALUES (:idLibrary)")
+                        .bind("idLibrary", idLibrary)
+                        .execute()
+        );
+    }
+
+    public int findNextIDLibrary(String bookTitle) {
+        return jdbi.withHandle(handle ->
+
+                handle.createQuery("SELECT idLibrary FROM library WHERE bookTitle = :bookTitle")
+                        .bind("bookTitle", bookTitle)
+                        .mapTo(Integer.class)
+                        .findFirst()
+                        .get()
+        );
+    }
 }

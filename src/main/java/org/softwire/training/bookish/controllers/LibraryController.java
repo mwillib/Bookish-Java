@@ -2,17 +2,13 @@ package org.softwire.training.bookish.controllers;
 
 import org.softwire.training.bookish.models.database.Book;
 import org.softwire.training.bookish.models.database.Library;
-import org.softwire.training.bookish.models.database.Technology;
-import org.softwire.training.bookish.models.page.AboutPageModel;
 import org.softwire.training.bookish.models.page.BookPageModel;
 import org.softwire.training.bookish.models.page.LibraryPageModel;
 import org.softwire.training.bookish.services.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -46,6 +42,10 @@ public class LibraryController {
     RedirectView addBook(@ModelAttribute Library library) {
 
         libraryService.addBook(library);
+
+        String title = library.getBookTitle();
+        int idLibrary = libraryService.findNextIDLibrary(title);
+        libraryService.addCopy(idLibrary);
 
         return new RedirectView("/library");
     }
@@ -93,4 +93,11 @@ public class LibraryController {
 
         return new ModelAndView("book", "model", bookPageModel);
     }
+
+    @RequestMapping("/book/add-copy")
+    RedirectView addCopy(@RequestParam int idLibrary) {
+
+        libraryService.addCopy(idLibrary);
+
+        return new RedirectView("/library");    }
 }
