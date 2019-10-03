@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class LibraryService extends DatabaseService {
 
@@ -126,4 +127,24 @@ public class LibraryService extends DatabaseService {
         );
     }
 
+    public boolean copiesFound(int idBooks) {
+        Integer count = jdbi.withHandle(handle ->
+                handle.createQuery("SELECT COUNT(*) FROM books WHERE idBooks = :idBooks ")
+                .bind("idBooks", idBooks)
+                .mapTo(Integer.class)
+                .findFirst()
+                .get()
+        );
+                return (count > 0);
+    }
+
+    public int findIdLibrary(int idBooks) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT idLibrary FROM books WHERE idBooks = :idBooks")
+                        .bind("idBooks", idBooks)
+                        .mapTo(Integer.class)
+                        .findFirst()
+                        .get()
+        );
+    }
 }

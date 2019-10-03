@@ -71,7 +71,12 @@ public class LibraryController {
     @RequestMapping("/book/delete-copy")
     RedirectView deleteOneCopy(@RequestParam int idBooks) {
 
+        int idLibrary = libraryService.findIdLibrary(idBooks);
         libraryService.deleteOneCopy(idBooks);
+
+        if(!libraryService.copiesFound(idBooks)) { //no copies found
+            libraryService.deleteBook(idLibrary);
+        }
 
         return new RedirectView("/library");
     }
