@@ -59,6 +59,14 @@ public class LibraryController {
         return new RedirectView("/library");
     }
 
+    @RequestMapping("/book/delete-copy")
+    RedirectView deleteOneCopy(@RequestParam int idBooks) {
+
+        libraryService.deleteOneCopy(idBooks);
+
+        return new RedirectView("/library");
+    }
+
     @RequestMapping("/sorted-by-title")
     ModelAndView sortTitle() {
 

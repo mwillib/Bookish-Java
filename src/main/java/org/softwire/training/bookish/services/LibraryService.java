@@ -98,4 +98,12 @@ public class LibraryService extends DatabaseService {
                         .execute()
         );
     }
+
+    public void deleteOneCopy(int idBooks) {
+        jdbi.useHandle(handle ->
+                handle.createUpdate("DELETE FROM books WHERE idBooks = :idBooks")
+                        .bind("idBooks", idBooks)
+                        .execute()
+        );
+    }
 }
