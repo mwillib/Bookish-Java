@@ -90,4 +90,12 @@ public class LibraryService extends DatabaseService {
                         .get()
         );
     }
+
+    public void deleteCopies(int idLibrary) {
+        jdbi.useHandle(handle ->
+                handle.createUpdate("DELETE FROM books WHERE idLibrary = :idLibrary")
+                        .bind("idLibrary", idLibrary)
+                        .execute()
+        );
+    }
 }

@@ -53,6 +53,7 @@ public class LibraryController {
     @RequestMapping("/delete-book")
     RedirectView deleteBook(@RequestParam int idLibrary) {
 
+        libraryService.deleteCopies(idLibrary);
         libraryService.deleteBook(idLibrary);
 
         return new RedirectView("/library");
