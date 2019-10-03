@@ -40,6 +40,19 @@
                 </table>
             </div>
 
+            <form th:action="@{/library/search}" method="get">
+                <div class="add-tech-row">
+                    <label>
+                        <span>Search: </span>
+                        <input type="text" name="search">
+                    </label>
+                </div>
+                <div class="add-tech-row">
+                    <span><!-- spacer --></span>
+                    <input type="submit" value="Search" />
+                </div>
+            </form>
+
             <h2>Add a book:</h2>
             <form th:action="@{/library/add-book}" method="post">
                 <div class="add-book-row">

@@ -80,6 +80,16 @@ public class LibraryController {
         return new ModelAndView("library", "model", libraryPageModel);
     }
 
+    @RequestMapping("/search")
+    ModelAndView search(@RequestParam(defaultValue = "") String search){
+        List<Library> books = libraryService.searchBooks(search);
+
+        LibraryPageModel libraryPageModel = new LibraryPageModel();
+        libraryPageModel.setBooks(books);
+
+        return new ModelAndView("library", "model", libraryPageModel);
+    }
+
     @RequestMapping("/book")
     ModelAndView selectBook(@RequestParam int idLibrary) {
 

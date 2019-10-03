@@ -61,6 +61,14 @@ public class LibraryService extends DatabaseService {
         );
     }
 
+    public List<Library> searchBooks (String searchTerm) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM books WHERE bookTitle LIKE '%" + searchTerm + "%';")
+                        .mapToBean(Library.class)
+                        .list()
+        );
+    }
+
     public String specificTitle (int idLibrary) {
         return jdbi.withHandle(handle ->
 
