@@ -45,31 +45,35 @@
             </table>
         </div>
 
-    <!--    <h2>Add a book:</h2>-->
-    <!--    <form th:action="@{/library/add-book}" method="post">-->
-    <!--        <div class="add-book-row">-->
-    <!--            <label>-->
-    <!--                <span>Title: </span>-->
-    <!--                <input type="text" name="bookTitle">-->
-    <!--            </label>-->
-    <!--        </div>-->
-    <!--        <div class="add-book-row">-->
-    <!--            <label>-->
-    <!--                <span>Author: </span>-->
-    <!--                <input type="text" name="bookAuthor">-->
-    <!--            </label>-->
-    <!--        </div>-->
-    <!--        <div class="add-book-row">-->
-    <!--            <label>-->
-    <!--                <span>ISBN: </span>-->
-    <!--                <input type="text" name="ISBN">-->
-    <!--            </label>-->
-    <!--        </div>-->
-    <!--        <div class="add-book-row">-->
-    <!--            <span>&lt;!&ndash; spacer &ndash;&gt;</span>-->
-    <!--            <input type="submit" value="Add Book" />-->
-    <!--        </div>-->
-    <!--    </form>-->
+        <h2>Edit this book:</h2>
+        <form th:action="@{/library/edit-book}" method="post">
+            <div class="add-book-row">
+                <input th:value="${model.getSpecificBooks().get(0).getIdLibrary()}" type="text" name="idLibrary" hidden>
+            </div>
+            <div class="add-book-row">
+                <label>
+                    <span>Title: </span>
+                    <input type="text" name="bookTitle">
+                </label>
+            </div>
+            <div class="add-book-row">
+                <label>
+                    <span>Author: </span>
+                    <input type="text" name="bookAuthor">
+                </label>
+            </div>
+            <div class="add-book-row">
+                <label>
+                    <span>ISBN: </span>
+                    <input type="text" name="ISBN">
+                </label>
+            </div>
+            <div class="add-book-row">
+                <span><!-- spacer --></span>
+                <input type="submit" value="Update Book" />
+            </div>
+        </form>
+
     </div>
 
     </body>

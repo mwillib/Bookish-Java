@@ -8,6 +8,7 @@ import org.softwire.training.bookish.services.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -49,7 +50,15 @@ public class LibraryController {
 
         return new RedirectView("/library");
     }
-//
+
+    @PostMapping("/edit-book")
+    RedirectView editBook(@ModelAttribute Library library) {
+
+        libraryService.editBook(library);
+
+        return new RedirectView("/library");
+    }
+
     @RequestMapping("/delete-book")
     RedirectView deleteBook(@RequestParam int idLibrary) {
 
@@ -82,6 +91,17 @@ public class LibraryController {
     ModelAndView sortAuthor() {
 
         List<Library> allBooks = libraryService.sortByAuthor();
+
+        LibraryPageModel libraryPageModel = new LibraryPageModel();
+        libraryPageModel.setBooks(allBooks);
+
+        return new ModelAndView("library", "model", libraryPageModel);
+    }
+
+    @RequestMapping("/sorted-by-ISBN")
+    ModelAndView sortISBN() {
+
+        List<Library> allBooks = libraryService.sortByISBN();
 
         LibraryPageModel libraryPageModel = new LibraryPageModel();
         libraryPageModel.setBooks(allBooks);

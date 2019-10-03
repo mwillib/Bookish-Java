@@ -51,6 +51,14 @@ public class LibraryService extends DatabaseService {
         );
     }
 
+    public List<Library> sortByISBN() {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM library ORDER BY ISBN ASC")
+                        .mapToBean(Library.class)
+                        .list()
+        );
+    }
+
     public List<Book> selectBook(int idLibrary) {
         return jdbi.withHandle(handle ->
 
@@ -106,4 +114,16 @@ public class LibraryService extends DatabaseService {
                         .execute()
         );
     }
+
+    public void editBook(Library library) {
+        jdbi.useHandle(handle ->
+                handle.createUpdate("UPDATE library SET bookTitle = :bookTitle, bookAuthor = :bookAuthor, ISBN = :ISBN WHERE idLibrary = :idLibrary")
+                        .bind("bookTitle", library.getBookTitle())
+                        .bind("bookAuthor", library.getBookAuthor())
+                        .bind("ISBN", library.getISBN())
+                        .bind("idLibrary", library.getIdLibrary())
+                        .execute()
+        );
+    }
+
 }
